@@ -88,7 +88,7 @@ class LoginHelper {
   }
     Future<int> deleteLogado() async {
     Database dbLogin = await databases.db;
-    await dbLogin.delete(loginTable);
+    await dbLogin.delete(logadoTable);
     return 1;
   }
 
