@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'Contato.dart';
-import 'Login_OLD.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../helper/pessoa_helper.dart';
 import '../helper/login_helper.dart';
 import '../utils/Dialogs.dart';
+import '../ui/LoginScreen.dart';
 
 class HomePage extends StatefulWidget {
   int login_id;
@@ -25,10 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState(){
-    // TODO: implement initState
     super.initState();
     _getAllPersons();
-    print('Home logado:'+widget.login_id.toString());
   }
 
   @override
@@ -131,7 +129,7 @@ class _HomePageState extends State<HomePage> {
           await helperLog.deleteLogado();
           Navigator.pop(context);
           await Navigator.push(context,
-              MaterialPageRoute(builder: (context) => LoginPage()));
+              MaterialPageRoute(builder: (context) => LoginScreen()));
         break;
     }
     setState(() {});

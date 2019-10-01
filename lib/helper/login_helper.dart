@@ -28,12 +28,12 @@ class LoginHelper {
 
 
 
-  Future<Login> getLogin(String nome,String senha) async {
+  Future<Login> getLogin(String email,String senha) async {
     Database dbLogin = await databases.db;
     List<Map> maps = await dbLogin.query(loginTable,
         columns: [idLoginColumn, nomeLoginColumn, senhaLoginColumn],
-        where: "$nomeLoginColumn = ? AND $senhaLoginColumn = ?",
-        whereArgs: [nome,senha]);
+        where: "$emailLoginColumn = ? AND $senhaLoginColumn = ?",
+        whereArgs: [email,senha]);
     if(maps.length > 0){
       return Login.fromMap(maps.first);
     } else {
