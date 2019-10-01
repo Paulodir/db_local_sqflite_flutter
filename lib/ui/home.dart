@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'Contato.dart';
-import 'login.dart';
+import 'Login_OLD.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../helper/pessoa_helper.dart';
 import '../helper/login_helper.dart';
@@ -9,6 +9,7 @@ import '../utils/Dialogs.dart';
 
 class HomePage extends StatefulWidget {
   int login_id;
+
   HomePage(this.login_id);
   @override
   _HomePageState createState() => _HomePageState();
@@ -23,10 +24,11 @@ class _HomePageState extends State<HomePage> {
   List<Person> person = List();
 
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
     _getAllPersons();
+    print('Home logado:'+widget.login_id.toString());
   }
 
   @override
@@ -126,7 +128,7 @@ class _HomePageState extends State<HomePage> {
         });
         break;
       case OrderOptions.sair:
-          helperLog.deleteLogado();
+          await helperLog.deleteLogado();
           Navigator.pop(context);
           await Navigator.push(context,
               MaterialPageRoute(builder: (context) => LoginPage()));
@@ -206,7 +208,7 @@ class _HomePageState extends State<HomePage> {
     dialog.showBottomOptions(context, botoes);
   }
 
-  void _getAllPersons() {
+  void _getAllPersons() async{
     helper.getAllPersons(widget.login_id).then((list) {
       setState(() {
         person = list;

@@ -53,6 +53,7 @@ class _CadastroState extends State<Cadastro> {
                 TextFormField(
                   decoration: InputDecoration(labelText: "Senha"),
                   keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
                   controller: _senhaController,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -73,12 +74,14 @@ class _CadastroState extends State<Cadastro> {
                         textColor: Colors.blueAccent,
                         onPressed: () async {
                           if (_formCadastro.currentState.validate()) {
-                            helper.saveCadastro(_nomeController.text,
-                                _emailController.text, _senhaController.text);
-                            Navigator.pop(context);
-                          } else {
-                            dialog.showAlertDialog(
-                                context, 'Aviso', 'Usuário não cadastrado');
+                            if(await helper.saveCadastro(_nomeController.text,
+                                _emailController.text, _senhaController.text)){
+                              Navigator.pop(context);
+                            }else {
+                              dialog.showAlertDialog(
+                                  context, 'Aviso', 'Usuário não cadastrado');
+                            }
+
                           }
                         }),
                   ),

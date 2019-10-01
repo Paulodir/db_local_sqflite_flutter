@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginHelper helper = LoginHelper();
+  List<Login> login = List();
   Dialogs dialog = new Dialogs();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
@@ -50,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(labelText: "Senha"),
                   keyboardType: TextInputType.visiblePassword,
                   controller: _senhaController,
+                  obscureText: true,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Digite sua senha';
@@ -86,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (context) => HomePage(user.id)));
                   } else {
                     dialog.showAlertDialog(
-                        context, 'Aviso', 'Login enválido');
+                        context, 'Aviso', 'Login inválido');
                   }
                 }
               },
